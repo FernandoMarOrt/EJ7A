@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
-
 package Ej7A;
-
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,20 +19,16 @@ import java.util.Scanner;
 public class Ej7AFernando {
 
     public static void main(String[] args) {
-        
-        List<String> listaString = sacarListaFichero("localizaciones.txt");
-        
-        listaString.forEach(System.out::println);
-        
-        
-        
-    }
-    
-  
-    
-      public static List<String> sacarListaFichero(String nomFichero) {
 
-         List<String> listaString = new ArrayList<>();
+        List<String> listaString = sacarListaFichero("localizaciones.txt");
+
+        listaString.forEach(System.out::println);
+
+    }
+
+    public static List<String> sacarListaFichero(String nomFichero) {
+
+        List<String> listaString = new ArrayList<>();
         // Fichero a leer con datos de ejemplo
         String idFichero = nomFichero;
 
@@ -59,20 +54,54 @@ public class Ej7AFernando {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        
+
         return listaString;
     }
-      
-      
-    public static Map<String , Integer> pasarListaMap(List<String> listaString){
-        
-        
-        for (int i = 0; i < listaString.size(); i++) {
-            
+
+    public static Map<String, Integer> mapAPartirLista(List<String> l) {
+
+        Map<String, Integer> aux = new HashMap<>();
+
+        int repeticionN = 0;
+        int repeticionS = 0;
+        int repeticionE = 0;
+        int repeticionO = 0;
+
+        for (int i = 0; i < l.size(); i++) {
+
+            if (l.get(i).equals("N")) {
+
+                repeticionN++;
+
+            }
+
+            if (l.get(i).equals("S")) {
+
+                repeticionS++;
+
+            }
+
+            if (l.get(i).equals("E")) {
+
+                repeticionE++;
+
+            }
+
+            if (l.get(i).equals("O")) {
+
+                repeticionO++;
+
+            }
+
         }
-        
-        return 
+
+        aux.put("N", repeticionN);
+        aux.put("S", repeticionS);
+        aux.put("E", repeticionE);
+        aux.put("O", repeticionO);
+
+        return aux;
+
     }
 
-    
 }
