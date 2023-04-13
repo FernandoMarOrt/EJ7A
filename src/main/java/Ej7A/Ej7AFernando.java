@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -60,6 +61,17 @@ public class Ej7AFernando {
         }
         
         return listaString;
+    }
+      
+      
+    public static Map<String , Integer> pasarListaMap(List<String> listaString){
+        
+        
+        for (int i = 0; i < listaString.size(); i++) {
+            
+        }
+        
+        return 
     }
 
     
