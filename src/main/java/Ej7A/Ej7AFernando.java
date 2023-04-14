@@ -56,13 +56,13 @@ public class Ej7AFernando {
         return listaString;
     }
 
-    public static List<String> filtrarLista(List<String> listaString) {
+    public static List<String> filtrarLista(List<String> listaString) { //CAMBIAR ESTO 
 
         List<String> filtrarLista = new ArrayList<>();
 
         for (int i = 0; i < listaString.size(); i++) {
 
-            filtrarLista.add(listaString.get(i));
+            filtrarLista.add(String.valueOf(listaString.get(i).charAt(5)));
 
         }
 
