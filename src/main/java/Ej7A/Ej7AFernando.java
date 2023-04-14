@@ -21,8 +21,22 @@ public class Ej7AFernando {
     public static void main(String[] args) {
 
         List<String> listaString = sacarListaFichero("localizaciones.txt");
+        Map<String, String> listaMap = mapLista(listaString);
 
+        System.out.println("Fichero Original");
+        ServiciosFicheros.leerFichero("localizaciones.txt");
+
+        System.out.println("Primera lista:");
         listaString.forEach(System.out::println);
+
+        System.out.println("");
+        System.out.println("MAP:");
+        System.out.println(listaMap.toString());
+        System.out.println("");
+
+        ServiciosFicheros.generarFichero("contadorLocalizaciones.txt", listaMap);
+        ServiciosFicheros.leerFichero("contadorLocalizaciones.txt");
+    
 
     }
 
@@ -46,7 +60,7 @@ public class Ej7AFernando {
                 linea = datosFichero.nextLine();
                 // Se guarda en el array de String cada elemento de la
                 // línea en función del carácter separador de campos del fichero CSV
-                tokens = linea.split(":");
+                tokens = linea.split(": ");
 
                 listaString.add(tokens[1]);
 
@@ -58,49 +72,50 @@ public class Ej7AFernando {
         return listaString;
     }
 
-    public static Map<String, Integer> mapAPartirLista(List<String> l) {
+    public static Map<String, String> mapLista(List<String> listaString) {
 
-        Map<String, Integer> aux = new HashMap<>();
+        Map<String, String> listaMap = new HashMap<>();
 
-        int repeticionN = 0;
-        int repeticionS = 0;
-        int repeticionE = 0;
-        int repeticionO = 0;
+        //Contadores de N,S,E,O
+        int contadorN = 0;
+        int contadorS = 0;
+        int contadorE = 0;
+        int contadorO = 0;
 
-        for (int i = 0; i < l.size(); i++) {
+        for (int i = 0; i < listaString.size(); i++) {
 
-            if (l.get(i).equals("N")) {
+            //Si en la lista coincide alguno de los caracteres suma 1 al contador
+            if (listaString.get(i).equals("N")) {
 
-                repeticionN++;
+                contadorN++;
 
-            }
+            } else if (listaString.get(i).equals("S")) {
 
-            if (l.get(i).equals("S")) {
+                contadorS++;
 
-                repeticionS++;
+            } else if (listaString.get(i).equals("E")) {
 
-            }
+                contadorE++;
 
-            if (l.get(i).equals("E")) {
+            } else if (listaString.get(i).equals("O")) {
 
-                repeticionE++;
-
-            }
-
-            if (l.get(i).equals("O")) {
-
-                repeticionO++;
+                contadorO++;
 
             }
 
         }
 
-        aux.put("N", repeticionN);
-        aux.put("S", repeticionS);
-        aux.put("E", repeticionE);
-        aux.put("O", repeticionO);
+        String aux1 = String.valueOf(contadorN);
+        String aux2 = String.valueOf(contadorS);
+        String aux3 = String.valueOf(contadorE);
+        String aux4 = String.valueOf(contadorO);
 
-        return aux;
+        listaMap.put("N", aux1);
+        listaMap.put("S", aux2);
+        listaMap.put("E", aux3);
+        listaMap.put("O", aux4);
+
+        return listaMap;
 
     }
 
