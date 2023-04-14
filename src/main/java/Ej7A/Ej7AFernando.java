@@ -20,11 +20,8 @@ public class Ej7AFernando {
 
     public static void main(String[] args) {
 
-        List<String> listaString = sacarListaFichero("localizaciones.txt");
+        List<String> listaString = pasarFicheroLista("localizaciones.txt");
         Map<String, String> listaMap = mapLista(listaString);
-
-        System.out.println("Fichero Original");
-        ServiciosFicheros.leerFichero("localizaciones.txt");
 
         System.out.println("Primera lista:");
         listaString.forEach(System.out::println);
@@ -36,33 +33,20 @@ public class Ej7AFernando {
 
         ServiciosFicheros.generarFichero("contadorLocalizaciones.txt", listaMap);
         ServiciosFicheros.leerFichero("contadorLocalizaciones.txt");
-    
 
     }
 
-    public static List<String> sacarListaFichero(String nomFichero) {
+    public static List<String> pasarFicheroLista(String nomFichero) {
 
         List<String> listaString = new ArrayList<>();
         // Fichero a leer con datos de ejemplo
         String idFichero = nomFichero;
 
-        // Variables para guardar los datos que se van leyendo
-        String[] tokens;
-        String linea;
-
-        // Inicialización del flujo "datosFichero" en función del archivo llamado "idFichero"
-        // Estructura try-with-resources. Permite cerrar los recursos una vez finalizadas
-        // las operaciones con el archivo
         try ( Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
             // hasNextLine devuelve true mientras haya líneas por leer
             while (datosFichero.hasNextLine()) {
-                // Guarda la línea completa en un String
-                linea = datosFichero.nextLine();
-                // Se guarda en el array de String cada elemento de la
-                // línea en función del carácter separador de campos del fichero CSV
-                tokens = linea.split(": ");
 
-                listaString.add(tokens[1]);
+                listaString.add(datosFichero.nextLine());
 
             }
         } catch (FileNotFoundException e) {
@@ -70,6 +54,19 @@ public class Ej7AFernando {
         }
 
         return listaString;
+    }
+
+    public static List<String> filtrarLista(List<String> listaString) {
+
+        List<String> filtrarLista = new ArrayList<>();
+
+        for (int i = 0; i < listaString.size(); i++) {
+
+            filtrarLista.add(listaString.get(i));
+
+        }
+
+        return filtrarLista;
     }
 
     public static Map<String, String> mapLista(List<String> listaString) {
